@@ -23,10 +23,10 @@ export function multiply(a: number, b: number): Promise<number> {
 
 export function navigateToTrimmer(
   uri: string,
-  duration: string
+  options: object
 ): Promise<string> {
   // try {
-  return K4lVideoTrimmer.navigateToTrimmer(uri, duration);
+  return K4lVideoTrimmer.navigateToTrimmer(uri, options);
   // } catch (error) {
   //   console.log(JSON.stringify(error));
   // }

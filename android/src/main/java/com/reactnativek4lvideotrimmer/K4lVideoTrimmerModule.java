@@ -22,6 +22,7 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.module.annotations.ReactModule;
 // import com.google.gson.Gson;
 import com.gowtham.library.ui.ActVideoTrimmer;
@@ -32,7 +33,6 @@ import com.gowtham.library.utils.TrimVideoOptions;
 @ReactModule(name = K4lVideoTrimmerModule.NAME)
 public class K4lVideoTrimmerModule extends ReactContextBaseJavaModule implements ActivityEventListener {
   public static final String NAME = "K4lVideoTrimmer";
-  static final String EXTRA_VIDEO_PATH = "EXTRA_VIDEO_PATH";
   Promise promise;
 
   public K4lVideoTrimmerModule(ReactApplicationContext reactContext) {
@@ -54,13 +54,18 @@ public class K4lVideoTrimmerModule extends ReactContextBaseJavaModule implements
   }
 
   @ReactMethod
-  void navigateToTrimmer(@NonNull String uri, @NonNull String duration, Promise promise) {
+  void navigateToTrimmer(@NonNull String uri, @NonNull ReadableMap options, Promise promise) {
     this.promise = promise;
     Activity activity = getCurrentActivity();
     if (activity != null) {
       Intent intent = new Intent(activity, TrimmerActivity.class);
-      intent.putExtra("EXTRA_VIDEO_PATH", uri);
-      intent.putExtra("VIDEO_TRIM_DURATION", duration);
+      intent.putExtra("K4L_VIDEO_PATH", uri);
+      intent.putExtra("K4L_SET_ACCURATE_CUT", options.hasKey("accurateCut") ? options.getBoolean("accurateCut") : false);
+      intent.putExtra("K4L_SET_HIDE_SEEK_BAR", options.hasKey("hideSeekBar") ? options.getBoolean("hideSeekBar") : false);
+      intent.putExtra("K4L_MIN_DURATION", options.hasKey("minDuration") ? options.getInt("minDuration") : 0);
+      intent.putExtra("K4L_MAX_DURATION", options.hasKey("maxDuration") ? options.getInt("maxDuration") : 1);
+      intent.putExtra("K4L_TITLE", options.hasKey("title") ? options.getInt("title") : "");
+      intent.putExtra("K4L_MESSAGE", options.hasKey("message") ? options.getInt("message") : "");
       activity.startActivityForResult(intent, 1);
     }
   }

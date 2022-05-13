@@ -53,18 +53,36 @@ public class TrimmerActivity extends AppCompatActivity {
     setContentView(R.layout.activity_trimmer);
 
     Intent extraIntent = getIntent();
-    Uri path = Uri.parse(extraIntent.getStringExtra("EXTRA_VIDEO_PATH"));
-    Long duration = Long.valueOf(extraIntent.getStringExtra("VIDEO_TRIM_DURATION"));
+    Uri path = Uri.parse(extraIntent.getStringExtra("K4L_VIDEO_PATH"));
     this.videoUri = String.valueOf(path);
-    openTrimActivity(this.videoUri, duration);
+    openTrimActivity(
+        this.videoUri,
+        extraIntent.getBooleanExtra("K4L_SET_ACCURATE_CUT", false),
+        extraIntent.getBooleanExtra("K4L_SET_HIDE_SEEK_BAR", false),
+        extraIntent.getLongExtra("K4L_MIN_DURATION", 0L),
+        extraIntent.getLongExtra("K4L_MAX_DURATION", 1L),
+        extraIntent.getStringExtra("K4L_TITLE"),
+        extraIntent.getStringExtra("K4L_MESSAGE")
+    );
   }
 
-  private void openTrimActivity(String path, Long duration) {
+  private void openTrimActivity(
+      String path,
+      boolean accurateCut,
+      boolean hideSeekBar,
+      long minDuration,
+      long maxDuration,
+      String title,
+      String message
+  ) {
+     Toast.makeText(TrimmerActivity.this, message, Toast.LENGTH_LONG).show();
+
      TrimVideo.activity(String.valueOf(path))
-      .setTrimType(TrimType.FIXED_DURATION)
-      .setHideSeekBar(true)
-      .setFixedDuration(duration)
-      .setTitle("select maximum " + duration + " seconds")
+      .setTrimType(TrimType.MIN_MAX_DURATION)
+      .setAccurateCut(accurateCut)
+      .setHideSeekBar(hideSeekBar)
+      .setMinToMax(minDuration, maxDuration)
+      .setTitle(title)
       .start(TrimmerActivity.this, startForResult);
   }
 }
