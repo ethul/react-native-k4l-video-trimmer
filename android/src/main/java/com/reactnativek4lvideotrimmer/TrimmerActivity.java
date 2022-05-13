@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -75,7 +74,7 @@ public class TrimmerActivity extends AppCompatActivity {
       String title,
       String message
   ) {
-     Toast.makeText(TrimmerActivity.this, message, Toast.LENGTH_LONG).show();
+//     Toast.makeText(TrimmerActivity.this, message, Toast.LENGTH_LONG).show();
 
      TrimVideo.activity(String.valueOf(path))
 //      .setTrimType(TrimType.MIN_MAX_DURATION)
