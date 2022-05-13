@@ -64,8 +64,8 @@ public class K4lVideoTrimmerModule extends ReactContextBaseJavaModule implements
       intent.putExtra("K4L_SET_HIDE_SEEK_BAR", options.hasKey("hideSeekBar") ? options.getBoolean("hideSeekBar") : false);
       intent.putExtra("K4L_MIN_DURATION", options.hasKey("minDuration") ? options.getInt("minDuration") : 0);
       intent.putExtra("K4L_MAX_DURATION", options.hasKey("maxDuration") ? options.getInt("maxDuration") : 1);
-      intent.putExtra("K4L_TITLE", options.hasKey("title") ? options.getInt("title") : "");
-      intent.putExtra("K4L_MESSAGE", options.hasKey("message") ? options.getInt("message") : "");
+      intent.putExtra("K4L_TITLE", options.hasKey("title") ? options.getString("title") : "");
+      intent.putExtra("K4L_MESSAGE", options.hasKey("message") ? options.getString("message") : "");
       activity.startActivityForResult(intent, 1);
     }
   }
