@@ -78,10 +78,10 @@ public class TrimmerActivity extends AppCompatActivity {
      Toast.makeText(TrimmerActivity.this, message, Toast.LENGTH_LONG).show();
 
      TrimVideo.activity(String.valueOf(path))
-      .setTrimType(TrimType.MIN_MAX_DURATION)
+//      .setTrimType(TrimType.MIN_MAX_DURATION)
       .setAccurateCut(accurateCut)
       .setHideSeekBar(hideSeekBar)
-      .setMinToMax(minDuration, maxDuration)
+ //     .setMinToMax(minDuration, maxDuration)
       .setTitle(title)
       .start(TrimmerActivity.this, startForResult);
   }
