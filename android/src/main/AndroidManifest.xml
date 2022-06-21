@@ -5,6 +5,7 @@
     <application>
         <activity
             android:name=".TrimmerActivity"
+            android:theme="@style/Theme.AppCompat"
             android:exported="true" />
     </application>
 
